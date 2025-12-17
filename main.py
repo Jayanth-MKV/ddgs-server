@@ -34,6 +34,9 @@ from models.schemas import ErrorResponse
 # Import rate limit configuration
 from config import rate_limit_config
 
+# Import MCP server
+from mcp_server import mcp
+
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -46,13 +49,17 @@ limiter = Limiter(
     headers_enabled=True,  # Add rate limit info to response headers
 )
 
-# Initialize FastAPI app
+# Create MCP ASGI app
+mcp_app = mcp.http_app(path="/mcp")
+
+# Initialize FastAPI app with MCP lifespan
 app = FastAPI(
     title="DDGS Metasearch API",
     description="A comprehensive metasearch API powered by DDGS library with smart rate limiting",
     version="1.0.0",
     docs_url="/docs",
     redoc_url="/redoc",
+    lifespan=mcp_app.lifespan,
 )
 
 # Add rate limiter to app state
@@ -68,6 +75,9 @@ app.include_router(video_router)
 app.include_router(news_router)
 app.include_router(book_router)
 app.include_router(unified_router)
+
+# Mount MCP server
+app.mount("/", mcp_app)
 
 
 # Root endpoint
@@ -86,6 +96,7 @@ async def root(request: Request, response: Response):
             "news_search": "/api/search/news",
             "book_search": "/api/search/books",
             "unified_search": "/api/search/all",
+            "mcp_server": "/mcp",
             "documentation": "/docs",
         },
     }
