@@ -1,6 +1,7 @@
 # DDGS Server - Complete Implementation
 
 A production-ready server with DDGS metasearch integration and MCP (Model Context Protocol) support.
+A production-ready server with DDGS metasearch integration and MCP (Model Context Protocol) support.
 
 ---
 
@@ -9,6 +10,7 @@ A production-ready server with DDGS metasearch integration and MCP (Model Contex
 ```
 ddgs-server/
 ├── main.py                 # FastAPI app initialization and router registration
+├── mcp_server.py          # MCP server with search tools for LLMs
 ├── mcp_server.py          # MCP server with search tools for LLMs
 ├── models/                 # Data models and schemas
 │   ├── __init__.py
@@ -62,13 +64,13 @@ uvicorn main:app --reload --host 0.0.0.0 --port 8000
 - **Swagger UI**: http://localhost:8000/docs
 - **ReDoc**: http://localhost:8000/redoc
 - **API Root**: http://localhost:8000
-- **MCP Server**: http://localhost:8000/mcp/mcp
+- **MCP Server**: http://localhost:8000/mcp
 
 ---
 
 ## 🤖 MCP Server Integration
 
-This server includes an integrated MCP (Model Context Protocol) server that provides LLM-friendly search tools. The MCP server is mounted at `/mcp/mcp` and exposes the following tools:
+This server includes an integrated MCP (Model Context Protocol) server that provides LLM-friendly search tools. The MCP server is mounted at `/mcp` and exposes the following tools:
 
 ### MCP Tools Available:
 - **search_web** - Search the web for text content
@@ -79,7 +81,25 @@ This server includes an integrated MCP (Model Context Protocol) server that prov
 - **search_everything** - Search all sources at once (parallel)
 
 ### Using MCP Server:
-The MCP server reuses all existing controller logic, making it efficient and maintainable. It's accessible at `/mcp/mcp` for LLM clients that support the MCP protocol.
+The MCP server reuses all existing controller logic, making it efficient and maintainable. It's accessible at `/mcp` for LLM clients that support the MCP protocol.
+- **MCP Server**: http://localhost:8000/mcp
+
+---
+
+## 🤖 MCP Server Integration
+
+This server includes an integrated MCP (Model Context Protocol) server that provides LLM-friendly search tools. The MCP server is mounted at `/mcp` and exposes the following tools:
+
+### MCP Tools Available:
+- **search_web** - Search the web for text content
+- **search_images** - Search for images with size/color filters
+- **search_videos** - Search for videos with resolution/duration filters
+- **search_news** - Search for news articles with time limits
+- **search_books** - Search for books
+- **search_everything** - Search all sources at once (parallel)
+
+### Using MCP Server:
+The MCP server reuses all existing controller logic, making it efficient and maintainable. It's accessible at `/mcp` for LLM clients that support the MCP protocol.
 
 ---
 
