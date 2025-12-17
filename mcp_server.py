@@ -22,7 +22,7 @@ from controllers.unified_controller import search_all
 from controllers.content_controller import fetch_url_content, fetch_multiple_urls
 
 # Create MCP server
-mcp = FastMCP("DDGS Search Tools")
+mcp = FastMCP("DDGS Search Tools", stateless_http=True)
 
 
 @mcp.tool()
