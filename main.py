@@ -51,7 +51,7 @@ limiter = Limiter(
 )
 
 # Create MCP ASGI app
-mcp_app = mcp.http_app("/mcp")
+mcp_app = mcp.http_app(path="/mcp")
 
 # Initialize FastAPI app with MCP lifespan
 app = FastAPI(
@@ -83,7 +83,7 @@ app.include_router(book_router)
 app.include_router(unified_router)
 app.include_router(content_router)
 
-# Mount MCP server
+# Mount MCP server at /ai
 app.mount("/ai", mcp_app)
 
 
@@ -105,7 +105,7 @@ async def root(request: Request, response: Response):
             "unified_search": "/api/search/all",
             "fetch_content": "/api/content/fetch",
             "fetch_multiple": "/api/content/fetch-multiple",
-            "mcp_server": "/mcp",
+            "mcp_server": "/ai/mcp",
             "documentation": "/docs",
         },
     }
