@@ -5,10 +5,10 @@ Fetches and extracts content from URLs
 
 import logging
 from typing import List, Dict, Any
-import httpx
 from bs4 import BeautifulSoup
 from fastapi import HTTPException
 import asyncio
+from ddgs.http_client import HttpClient
 
 logger = logging.getLogger(__name__)
 
@@ -35,18 +35,20 @@ async def fetch_url_content(
     try:
         logger.info(f"Fetching content from: {url}")
 
-        headers = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
-        }
+        # Use DDGS HttpClient with browser impersonation for better compatibility
+        # This uses primp which handles browser fingerprinting automatically
+        def fetch_with_ddgs():
+            """Network I/O done in thread pool to avoid blocking"""
+            client = HttpClient(timeout=timeout, verify=True)
+            # Use request method directly with url as positional arg
+            response = client.request("GET", url)
+            if response.status_code != 200:
+                raise Exception(f"HTTP {response.status_code}")
+            return response.text, response.status_code
 
-        # Use async httpx client to avoid blocking
-        async with httpx.AsyncClient(timeout=timeout, follow_redirects=True) as client:
-            response = await client.get(url, headers=headers)
-            response.raise_for_status()
-
-        # Store response data before thread pool
-        html_text = response.text
-        status_code = response.status_code
+        # Run network I/O in thread pool to keep it non-blocking
+        loop = asyncio.get_event_loop()
+        html_text, status_code = await loop.run_in_executor(None, fetch_with_ddgs)
 
         def parse_html():
             """CPU-intensive parsing done in thread pool to avoid blocking"""
@@ -113,12 +115,15 @@ async def fetch_url_content(
             "status_code": status_code,
         }
 
-    except httpx.HTTPError as e:
-        logger.error(f"HTTP error fetching {url}: {str(e)}")
-        raise HTTPException(status_code=400, detail=f"Failed to fetch URL: {str(e)}")
     except Exception as e:
         logger.error(f"Error fetching {url}: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Error processing URL: {str(e)}")
+        if "HTTP 403" in str(e) or "Forbidden" in str(e):
+            raise HTTPException(status_code=400, detail=f"Access denied (403): {url}")
+        elif "HTTP 404" in str(e):
+            raise HTTPException(status_code=400, detail=f"URL not found (404): {url}")
+        elif "timed out" in str(e).lower():
+            raise HTTPException(status_code=408, detail=f"Request timed out: {url}")
+        raise HTTPException(status_code=400, detail=f"Failed to fetch URL: {str(e)}")
 
 
 async def fetch_multiple_urls(
