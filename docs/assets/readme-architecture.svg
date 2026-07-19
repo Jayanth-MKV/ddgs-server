@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="720" viewBox="0 0 1400 720" role="img" aria-labelledby="title desc">
+  <title id="title">Open Agent Search architecture</title>
+  <desc id="desc">MCP clients and applications connect through local stdio or the FastAPI service to one shared search and content layer backed by DDGS providers.</desc>
+  <rect width="1400" height="720" fill="#F4F0E7"/>
+  <rect x="28" y="28" width="1344" height="664" fill="none" stroke="#151515" stroke-width="3"/>
+  <text x="72" y="92" fill="#69655E" font-family="Courier New, monospace" font-size="22" letter-spacing="3">OPEN AGENT SEARCH / SYSTEM MAP</text>
+  <text x="72" y="158" fill="#151515" font-family="Georgia, serif" font-size="54" font-weight="700">One search core. Two connection paths.</text>
+  <line x1="72" y1="194" x2="1328" y2="194" stroke="#B9B3A8" stroke-width="2"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <rect x="72" y="256" width="246" height="104" fill="#151515"/>
+    <text x="195" y="299" fill="#F4F0E7" font-size="24" font-weight="700" text-anchor="middle">MCP clients</text>
+    <text x="195" y="331" fill="#F4F0E7" font-size="18" text-anchor="middle">Claude · Cursor · IDEs</text>
+    <rect x="72" y="438" width="246" height="104" fill="none" stroke="#151515" stroke-width="3"/>
+    <text x="195" y="481" fill="#151515" font-size="24" font-weight="700" text-anchor="middle">Applications</text>
+    <text x="195" y="513" fill="#69655E" font-size="18" text-anchor="middle">Agents · services · scripts</text>
+    <rect x="410" y="256" width="254" height="104" fill="none" stroke="#151515" stroke-width="3"/>
+    <text x="537" y="299" fill="#151515" font-size="24" font-weight="700" text-anchor="middle">Local stdio MCP</text>
+    <text x="537" y="331" fill="#69655E" font-size="18" text-anchor="middle">oas-mcp</text>
+    <rect x="410" y="438" width="254" height="104" fill="none" stroke="#151515" stroke-width="3"/>
+    <text x="537" y="481" fill="#151515" font-size="24" font-weight="700" text-anchor="middle">FastAPI service</text>
+    <text x="537" y="513" fill="#69655E" font-size="18" text-anchor="middle">REST · streamable HTTP MCP</text>
+    <rect x="756" y="332" width="268" height="140" fill="#151515"/>
+    <text x="890" y="382" fill="#F4F0E7" font-size="25" font-weight="700" text-anchor="middle">Search + content tools</text>
+    <text x="890" y="418" fill="#F4F0E7" font-size="18" text-anchor="middle">web · images · video · news</text>
+    <text x="890" y="446" fill="#F4F0E7" font-size="18" text-anchor="middle">books · fetch · unified search</text>
+    <rect x="1112" y="332" width="216" height="140" fill="none" stroke="#151515" stroke-width="3"/>
+    <text x="1220" y="388" fill="#151515" font-size="25" font-weight="700" text-anchor="middle">DDGS</text>
+    <text x="1220" y="422" fill="#69655E" font-size="18" text-anchor="middle">upstream search</text>
+    <text x="1220" y="450" fill="#69655E" font-size="18" text-anchor="middle">providers</text>
+  </g>
+  <g fill="none" stroke="#151515" stroke-width="4">
+    <path d="M318 308H410"/><path d="M318 490H410"/>
+    <path d="M664 308H708V380H756"/><path d="M664 490H708V424H756"/>
+    <path d="M1024 402H1112"/>
+  </g>
+  <g fill="#151515"><path d="M410 308l-14-9v18Z"/><path d="M410 490l-14-9v18Z"/><path d="M756 380l-14-9v18Z"/><path d="M756 424l-14-9v18Z"/><path d="M1112 402l-14-9v18Z"/></g>
+  <text x="72" y="632" fill="#69655E" font-family="Courier New, monospace" font-size="19">SELF-HOSTABLE · FRAMEWORK-INDEPENDENT · ONE CONSISTENT TOOL SURFACE</text>
+</svg>
