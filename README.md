@@ -4,7 +4,7 @@
 
 <h1 align="center">Open Agent Search</h1>
 
-<p align="center"><strong>Give any MCP-capable agent web, image, video, news, book, and page-content search through one self-hostable service.</strong></p>
+<p align="center"><strong>One self-hostable search and content layer for AI agents and applications.</strong></p>
 
 <p align="center">
   <a href="https://pypi.org/project/open-agent-search/"><img alt="PyPI" src="https://img.shields.io/pypi/v/open-agent-search"></a>
@@ -28,7 +28,7 @@
 
 ## What is Open Agent Search?
 
-Open Agent Search (OAS) is an independent metasearch layer for AI agents and applications. It exposes the same search capabilities through a standalone stdio MCP server, a streamable HTTP MCP endpoint, and a REST API.
+Open Agent Search (OAS) is an independent retrieval layer for AI agents and applications. It provides one consistent search and content surface across local and deployed integrations.
 
 OAS replaces separate adapters for every search vertical with one consistent tool surface. Run it locally for a single coding agent or deploy the HTTP service for shared agent and application workloads.
 
