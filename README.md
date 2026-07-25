@@ -32,6 +32,8 @@ Open Agent Search (OAS) is an independent retrieval layer for AI agents and appl
 
 OAS replaces separate adapters for every search vertical with one consistent tool surface. Run it locally for a single coding agent or deploy the HTTP service for shared agent and application workloads.
 
+Search sources, transports, and client integrations can evolve without changing the repository's core goal: give agents and applications a dependable retrieval boundary they can control.
+
 ## Try it in 30 seconds
 
 ### Add search to Claude Code
