@@ -23,7 +23,7 @@
 </p>
 
 <p align="center">
-  <img src="docs/assets/readme-cover.svg" width="92%" alt="Open Agent Search paperback cover: one search layer for MCP-capable agents">
+  <img src="docs/assets/readme-architecture.svg" width="1000" alt="Open Agent Search architecture showing MCP clients and applications connecting through local MCP or HTTP service paths to one shared search and content layer and DDGS providers">
 </p>
 
 ## What is Open Agent Search?
@@ -89,10 +89,6 @@ The server exposes REST endpoints at `http://localhost:8000`, interactive API do
 
 ## Architecture
 
-<p align="center">
-  <img src="docs/assets/readme-architecture.svg" width="92%" alt="Open Agent Search architecture connecting MCP clients and applications to one shared search and content layer">
-</p>
-
 The local MCP command and the HTTP service share the same search and content capabilities. Choose the connection path that matches where the consuming agent or application runs.
 
 ### Two deployment paths
@@ -101,15 +97,6 @@ The local MCP command and the HTTP service share the same search and content cap
 | --- | --- | --- |
 | Local MCP | `uvx --from open-agent-search oas-mcp` | Giving a desktop or coding agent search with no persistent server |
 | HTTP service | `open-agent-search` | Applications, shared agent environments, REST clients, and remote MCP |
-
-```mermaid
-flowchart LR
-    A[MCP client] -->|stdio| B[oas-mcp]
-    C[Agent or application] -->|REST or /ai/mcp| D[FastAPI service]
-    B --> E[Search and content tools]
-    D --> E
-    E --> F[DDGS search providers]
-```
 
 ## Search surface
 
