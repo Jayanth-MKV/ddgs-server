@@ -60,8 +60,8 @@
   <g fill="none" stroke="#74809A" stroke-width="3" marker-end="url(#arrow)">
     <path d="M215 529h235"/>
     <path d="M215 735h235"/>
-    <path d="M670 546h80v65"/>
-    <path d="M670 754h80v-65"/>
+    <path d="M670 546h40v14h40"/>
+    <path d="M670 754h40v-50h40"/>
     <path d="M1050 611h170v31h70"/>
   </g>
 </svg>
